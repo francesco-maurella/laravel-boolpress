@@ -16,7 +16,6 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
           $table->id();
           $table->unsignedBigInteger('author_id');
-          $table->unsignedBigInteger('comments_id');
           $table->string('title', 50);
           $table->string('image', 255);
           $table->text('content');
@@ -25,10 +24,6 @@ class CreatePostsTable extends Migration
           $table->foreign('author_id')
                 ->references('id')
                 ->on('authors');
-
-          $table->foreign('comments_id')
-                ->references('id')
-                ->on('comments');
 
         });
     }
