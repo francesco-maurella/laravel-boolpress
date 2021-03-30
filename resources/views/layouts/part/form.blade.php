@@ -15,7 +15,7 @@ if ($edit) {
     @method( $method )
 
     <div class="form-group">
-        <label for="name">Title</label>
+        <label for="title">Title</label>
         <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
         type="text" name="title" value="{{ isset($post) ? $post->title : '' }}">
         <div class="invalid-feedback">
@@ -23,10 +23,10 @@ if ($edit) {
         </div>
     </div>
     <div class="form-group">
-        <label for="name">Author</label>
+        <label for="author_id">Author</label>
         <select class="form-control {{ $errors->has('author') ? 'is-invalid' : '' }}"
-        type="text" name="author">
-        <option value="{{ isset($post) ? $post->author->username : '' }}">
+        type="text" name="author_id">
+        <option value="{{ isset($post) ? $post->author->id : '' }}">
           @if (isset($post))
             {{ $post->author->username }}
             @else
@@ -44,7 +44,17 @@ if ($edit) {
         </div>
     </div>
     <div class="form-group">
-        <label for="name">Conten</label>
+      <label for="tags">Tags</label>
+      <select multiple name="tags[]" class="form-control">
+        @foreach ($tags as $tag)
+          <option value="{{ $tag->id }}" >
+            {{ $tag->content }}
+          </option>
+        @endforeach
+      </select>
+    </div>
+    <div class="form-group">
+        <label for="name">Content</label>
         <textarea class="form-control" name="content" rows="3">
           {{ isset($post) ? $post->content : '' }}
         </textarea>

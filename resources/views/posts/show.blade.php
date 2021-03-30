@@ -8,7 +8,8 @@
         <th scope="col">Title</th>
         <th scope="col">Content</th>
         <th scope="col">Author</th>
-        <th scope="col">Comments ( {{count($post->comments)}} )</th>
+        <th scope="col">Tags({{count($post->tags)}})</th>
+        <th scope="col">Comments({{count($post->comments)}})</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,12 @@
               ['author' => $post->author->id] )}}">
             {{ $post->author->username }}
             </a>
+          </td>
+          <td>
+            @foreach ($post->tags as $tag)
+              #{{ $tag->content }}
+              <br />
+            @endforeach
           </td>
           <td>
             @foreach ($post->comments as $comment)

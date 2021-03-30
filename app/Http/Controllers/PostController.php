@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Author;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -27,7 +28,8 @@ class PostController extends Controller
     public function create()
     {
       $authors = Author::all();
-      return view('posts.create', compact('authors'));
+      $tags = Tag::all();
+      return view('posts.create', compact('authors', 'tags'));
     }
 
     /**
@@ -38,7 +40,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->isValid($request);
+
+      $data = $request->all();
+      $post = new Post();
+      $post->fill($data);
+      $post->save();
+
+      $post->tags()->attach($data['tags']);
+
+      return redirect()->route('posts.index');
     }
 
     /**
@@ -61,7 +72,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
       $authors = Author::all();
-      return view('posts.edit', compact('post', 'authors'));
+      $tags = Tag::all();
+      return view('posts.edit', compact('post', 'authors', 'tags'));
     }
 
     /**
@@ -71,9 +83,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+      $this->isValid($request);
+
+      $data = $request->all();
+      $post->fill($data);
+      $post->update();
+
+      $post->tags()->attach($data['tags']);
+
+      return redirect()->route('posts.index');
     }
 
     /**
@@ -86,4 +106,12 @@ class PostController extends Controller
     {
         //
     }
+
+    public function isValid($list) {
+      $list->validate(
+        [
+          'title' => 'required',
+          'content' => 'required',
+        ]);
+      }
 }
