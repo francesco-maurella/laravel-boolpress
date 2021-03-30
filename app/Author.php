@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
-  public function author_infos()
+  public function author_info()
   {
     return $this->hasOne('App\AuthorInfo');
   }

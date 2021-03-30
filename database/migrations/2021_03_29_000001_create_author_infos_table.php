@@ -18,6 +18,7 @@ class CreateAuthorInfosTable extends Migration
             $table->unsignedBigInteger('author_id');
             $table->string('name', 50);
             $table->string('surname', 50);
+            $table->string('avatar', 255);
             $table->string('email', 100);
             $table->timestamps();
 
