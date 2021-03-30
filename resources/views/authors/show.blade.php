@@ -10,7 +10,7 @@
         <th scope="col">Name</th>
         <th scope="col">Surname</th>
         <th scope="col">Email</th>
-        <th scope="col">Posts</th>
+        <th scope="col">Posts ( {{count($author->posts)}} )</th>
       </tr>
     </thead>
     <tbody>

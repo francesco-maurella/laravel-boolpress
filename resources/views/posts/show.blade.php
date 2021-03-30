@@ -8,7 +8,7 @@
         <th scope="col">Title</th>
         <th scope="col">Content</th>
         <th scope="col">Author</th>
-        <th scope="col">Comments</th>
+        <th scope="col">Comments ( {{count($post->comments)}} )</th>
       </tr>
     </thead>
     <tbody>
