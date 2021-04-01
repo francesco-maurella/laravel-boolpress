@@ -6,7 +6,6 @@ use App\Author;
 use App\AuthorInfo;
 use App\Post;
 use App\Comment;
-use App\Tags;
 
 class PostSeeder extends Seeder
 {
@@ -15,12 +14,12 @@ class PostSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Faker $faker, Tag $tags)
+    public function run(Faker $faker)
     {
 
       for ($a=0; $a < 50 ; $a++) {
         $author = new Author();
-        $author->username = $faker->name();
+        $author->username = $faker->name(35);
         $author->save();
 
         $authorInfo = new AuthorInfo();
@@ -35,11 +34,6 @@ class PostSeeder extends Seeder
           $post->title = $faker->text(45);
           $post->content = $faker->text(255);
           $author->posts()->save($post);
-
-          // for ($t=0; $t < rand(1,3) ; $t++) {
-          //   $post->tag()->attach($tags);
-          //   }
-          // }
 
           for ($c=0; $c < rand(1,25) ; $c++) {
             $comment = new Comment();

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Author;
 use App\Tag;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 
 class PostController extends Controller
 {
@@ -16,6 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
+      Mail::to('francesco.maurella@live.it')->send(new SendEmail());
       $posts = Post::all();
       return view('posts.index', compact('posts'));
     }
