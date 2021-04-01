@@ -7,7 +7,7 @@ use App\Post;
 use App\Author;
 use App\Tag;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendEmail;
+use App\Mail\Email;
 
 class PostController extends Controller
 {
@@ -18,7 +18,6 @@ class PostController extends Controller
      */
     public function index()
     {
-      Mail::to('francesco.maurella@live.it')->send(new SendEmail());
       $posts = Post::all();
       return view('posts.index', compact('posts'));
     }
@@ -51,6 +50,10 @@ class PostController extends Controller
       $post->save();
 
       $post->tags()->attach($data['tags']);
+
+      $mailableObject = new Email($post);
+
+      Mail::to('francesco.maurella@live.it')->send($mailableObject);
 
       return redirect()->route('posts.index');
     }
