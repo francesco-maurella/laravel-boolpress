@@ -29,7 +29,7 @@ class Email extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(Post $post)
     {
       $post = $this->post;
       return $this->view('mail.index', compact('post'));

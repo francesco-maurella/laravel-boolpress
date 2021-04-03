@@ -10,7 +10,7 @@ if ($edit) {
 }
 @endphp
 
-<form action="{{ $url }}" method="post">
+<form action="{{ $url }}" method="post" enctype="multipart/form-data">
     @csrf
     @method( $method )
 
@@ -52,6 +52,10 @@ if ($edit) {
           </option>
         @endforeach
       </select>
+    </div>
+    <div class="form-group">
+      <label for="img">Tags</label>
+      <input type="file" name="img" class="form-control">
     </div>
     <div class="form-group">
         <label for="name">Content</label>

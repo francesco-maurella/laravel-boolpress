@@ -42,11 +42,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+      $path = $request->file('img')->store('images');
       $this->isValid($request);
 
       $data = $request->all();
       $post = new Post();
       $post->fill($data);
+      $post->img = $path;
       $post->save();
 
       $post->tags()->attach($data['tags']);

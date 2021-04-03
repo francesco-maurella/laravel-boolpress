@@ -7,6 +7,7 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Content</th>
+        <th scope="col">Images</th>
         <th scope="col">Author</th>
       </tr>
     </thead>
@@ -20,6 +21,13 @@
             </a>
           </td>
           <td>{{ $post->content }}</td>
+          <td>
+            @if ($post->img)
+              Yes
+              @else
+                No
+            @endif
+          </td>
           <td>
             <a href="{{route('authors.show',
               ['author' => $post->author->id])}}">

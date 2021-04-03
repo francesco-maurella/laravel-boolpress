@@ -16,7 +16,13 @@
         <tr>
           <th scope="row">{{ $post->id }}</th>
           <td>{{ $post->title}}</td>
-          <td>{{ $post->content }}</td>
+          <td>
+            {{ $post->content }}
+            @if ($post->img)
+              <img src="{{asset( $post->img )}}" alt="">
+            @endif
+            <br />
+          </td>
           <td>
             <a href="{{route('authors.show',
               ['author' => $post->author->id] )}}">
